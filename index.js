@@ -11,5 +11,16 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', require('./routes/api'));
 
+async function startServer() {
+    try {
+        await connectToDatabase();
+
+        app.listen(PORT, () => {
+            console.log(`Server is running on http://localhost:${PORT}`);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 startServer();
